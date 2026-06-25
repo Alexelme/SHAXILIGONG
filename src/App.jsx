@@ -9,31 +9,8 @@ import {
   navItems,
   pathways,
 } from './data/siteData.js';
-import BorderGlow from './components/BorderGlow/BorderGlow.jsx';
-import SideRays from './SideRays';
-
-const glowProps = {
-  backgroundColor: 'rgba(255, 255, 255, 0.82)',
-  borderRadius: 8,
-  glowRadius: 22,
-  glowColor: '206 92 72',
-  glowIntensity: 0.68,
-  edgeSensitivity: 20,
-  coneSpread: 18,
-  colors: ['rgba(8, 103, 217, 0.95)', 'rgba(65, 199, 244, 0.9)', 'rgba(255, 255, 255, 0.95)'],
-  fillOpacity: 0.24,
-};
-
-const GlowCard = ({ className = '', children, dark = false, animated = false, fillOpacity }) => (
-  <BorderGlow
-    {...glowProps}
-    animated={animated}
-    fillOpacity={fillOpacity ?? glowProps.fillOpacity}
-    backgroundColor={dark ? 'rgba(255, 255, 255, 0.1)' : glowProps.backgroundColor}
-    className={`sxlg-glow-card ${className}`}
-  >
-    {children}
-  </BorderGlow>
+const GlowCard = ({ className = '', children }) => (
+  <div className={`sxlg-card ${className}`}>{children}</div>
 );
 
 const SectionHeader = ({ eyebrow, title, text }) => (
@@ -48,7 +25,12 @@ const ImageRail = ({ images, compact = false }) => (
   <div className={compact ? 'image-rail compact' : 'image-rail'}>
     {images.map((image, index) => (
       <figure key={image} className="rail-card">
-        <img src={image} alt={`校园展示 ${index + 1}`} />
+        <img
+          src={image}
+          alt={`校园展示 ${index + 1}`}
+          loading="lazy"
+          decoding="async"
+        />
       </figure>
     ))}
   </div>
@@ -69,22 +51,15 @@ const Navigation = () => (
 
 const Hero = () => (
   <section id="top" data-section="hero" className="hero">
-    <img className="hero-bg" src="/images/hero.png" alt="中山市沙溪理工学校校园" />
-    <div className="hero-overlay" />
-    <SideRays
-      className="hero-rays"
-      speed={2}
-      rayColor1="#7dd3fc"
-      rayColor2="#ffffff"
-      intensity={3.2}
-      spread={2.2}
-      origin="top-right"
-      tilt={-12}
-      saturation={1.6}
-      blend={0.78}
-      falloff={1.12}
-      opacity={0.74}
+    <img
+      className="hero-bg"
+      src="/images/hero.webp"
+      alt="中山市沙溪理工学校校园"
+      fetchPriority="high"
+      decoding="async"
     />
+    <div className="hero-overlay" />
+    <div className="hero-rays" aria-hidden="true" />
     <div className="hero-content page-shell">
       <div className="hero-copy">
         <span className="eyebrow light">ADMISSION 2026</span>
@@ -95,7 +70,7 @@ const Hero = () => (
           <a href="#contact" className="ghost-btn">报名咨询</a>
         </div>
       </div>
-      <GlowCard className="hero-panel" dark animated fillOpacity={0.015}>
+      <GlowCard className="hero-panel">
         {heroStats.map((stat) => (
           <div key={stat.label}>
             <strong>{stat.value}</strong>
@@ -158,7 +133,7 @@ const AdmissionPlan = () => (
       />
       <div className="plan-layout">
         <div className="image-frame tall">
-          <img src="/images/admission-plan.png" alt="招生计划图片" />
+          <img src="/images/admission-plan.webp" alt="招生计划图片" loading="lazy" decoding="async" />
         </div>
         <GlowCard className="table-card">
           <table>
@@ -222,7 +197,7 @@ const Pathways = () => (
         </div>
       </div>
       <div className="image-frame">
-        <img src="/images/pathways.png" alt="升学路径图片" />
+        <img src="/images/pathways.webp" alt="升学路径图片" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -273,7 +248,7 @@ const Campus = () => (
         title="校园环境 / 学习生活"
         text="学校拥有实训中心、文化场馆和学生社团，教室与宿舍配套持续完善。"
       />
-      <ImageRail images={galleryImages.concat('/images/campus-6.png')} compact />
+      <ImageRail images={galleryImages.concat('/images/campus-6.webp')} compact />
     </div>
   </section>
 );
@@ -283,7 +258,7 @@ const Life = () => (
     <div className="page-shell split reverse">
       <div className="life-collage">
         {lifeImages.map((image) => (
-          <img key={image} src={image} alt="生活保障展示" />
+          <img key={image} src={image} alt="生活保障展示" loading="lazy" decoding="async" />
         ))}
       </div>
       <SectionHeader

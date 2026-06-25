@@ -61,16 +61,16 @@ export const feeCards = [
 ];
 
 export const galleryImages = [
-  '/images/campus-1.png',
-  '/images/campus-2.png',
-  '/images/campus-3.png',
-  '/images/campus-4.png',
-  '/images/campus-5.png',
+  '/images/campus-1.webp',
+  '/images/campus-2.webp',
+  '/images/campus-3.webp',
+  '/images/campus-4.webp',
+  '/images/campus-5.webp',
 ];
 
 export const lifeImages = [
-  '/images/life-1.png',
-  '/images/life-2.png',
-  '/images/life-3.png',
-  '/images/life-4.png',
+  '/images/life-1.webp',
+  '/images/life-2.webp',
+  '/images/life-3.webp',
+  '/images/life-4.webp',
 ];
