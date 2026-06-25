@@ -130,11 +130,24 @@ img {
 
 .hero-rays {
   position: absolute;
-  inset: 0;
+  top: -18%;
+  right: -8%;
   z-index: 3;
-  opacity: 1;
-  mix-blend-mode: plus-lighter;
-  filter: saturate(1.35) brightness(1.22);
+  width: min(70vw, 1100px);
+  height: min(90vw, 1200px);
+  pointer-events: none;
+  opacity: 0.72;
+  background:
+    conic-gradient(
+      from 225deg at 100% 0%,
+      transparent 0deg,
+      rgba(125, 211, 252, 0.38) 8deg,
+      transparent 18deg,
+      rgba(255, 255, 255, 0.3) 28deg,
+      transparent 42deg
+    );
+  filter: blur(10px);
+  transform: rotate(-8deg);
 }
 
 .hero-content {
@@ -229,25 +242,7 @@ img {
   backdrop-filter: blur(24px);
 }
 
-.hero-panel.sxlg-glow-card {
-  display: block;
-  overflow: hidden;
-}
-
-.hero-panel.sxlg-glow-card::after {
-  opacity: 0.025;
-}
-
-.hero-panel.sxlg-glow-card > .edge-light {
-  opacity: calc(1.18 * (var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
-}
-
-.hero-panel.sxlg-glow-card::before {
-  opacity: calc(1.35 * (var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
-}
-
-.hero-panel > .border-glow-inner > div,
-.hero-panel:not(.sxlg-glow-card) > div {
+.hero-panel > div {
   min-height: 128px;
   padding: 24px;
   background: rgba(255, 255, 255, 0.1);
@@ -648,62 +643,37 @@ td {
   font-weight: 800;
 }
 
-.sxlg-glow-card {
-  overflow: visible;
-}
-
-.sxlg-glow-card > .border-glow-inner {
-  height: 100%;
+.sxlg-card {
+  position: relative;
   overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.sxlg-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
 
-.hero-panel > .border-glow-inner {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  width: 100%;
-  min-width: 0;
-  padding: 0;
-  background: transparent;
-}
-
-.hero-panel > .border-glow-inner > div {
-  min-height: 128px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.feature-card > .border-glow-inner,
-.major-card > .border-glow-inner,
-.glass-card > .border-glow-inner,
-.fee-card > .border-glow-inner,
-.rule-card > .border-glow-inner,
-.contact-card > .border-glow-inner {
-  display: flex;
-  flex-direction: column;
-}
-
-.honor-item > .border-glow-inner {
-  justify-content: center;
-}
-
-.table-card > .border-glow-inner {
-  display: block;
-}
-
-.metric-strip > .sxlg-glow-card {
-  padding: 24px;
-  border-left: 4px solid var(--blue);
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: var(--shadow);
-}
-
-.metric-strip > .sxlg-glow-card > .border-glow-inner {
-  display: block;
+@media (hover: hover) {
+  .sxlg-card:hover {
+    transform: translateY(-2px);
+  }
 }
 
 @media (max-width: 1280px) {
+  .site-nav {
+    right: 24px;
+    left: auto;
+    width: auto;
+    min-width: 0;
+    display: flex;
+    transform: none;
+  }
+
   .site-nav nav {
     display: none;
   }
@@ -737,7 +707,9 @@ td {
 
   .site-nav {
     top: 10px;
-    width: calc(100% - 20px);
+    right: 10px;
+    left: 10px;
+    width: auto;
     min-height: 58px;
     display: flex;
     justify-content: flex-end;
@@ -777,10 +749,6 @@ td {
   }
 
   .hero-panel div {
-    min-height: 104px;
-  }
-
-  .hero-panel > .border-glow-inner > div {
     min-height: 104px;
   }
 
